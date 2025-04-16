@@ -32,7 +32,8 @@ function renderLeaderboard(data) {
   let teams = {};
   data.forEach((player) => {
     const name = player.player;
-    const team = round === 2 ? teamAssignments[2][name] || "Unassigned" : player.team;
+    // Vérification des données avant de les utiliser
+    const team = round === 2 ? (teamAssignments[2][name] || "Unassigned") : player.team;
     if (!teams[team]) teams[team] = [];
     teams[team].push(player);
   });
@@ -40,7 +41,7 @@ function renderLeaderboard(data) {
   let teamAverages = [];
   for (let team in teams) {
     const players = teams[team];
-    const total = players.reduce((sum, p) => sum + Number(p.score), 0);
+    const total = players.reduce((sum, p) => sum + (Number(p.score) || 0), 0); // Assurer que score est un nombre
     const avg = total / players.length;
     teamAverages.push({ team, avg });
   }
@@ -53,10 +54,13 @@ function renderLeaderboard(data) {
     teamDiv.innerHTML = `<h2>${team} - ${avg.toFixed(1)} pts</h2>`;
 
     teams[team].forEach((player) => {
+      // Assure-toi que le score est bien défini, sinon on lui donne 0 par défaut
+      const playerScore = player.score || 0; 
+
       const playerDiv = document.createElement("div");
       playerDiv.className = "player";
       playerDiv.innerHTML = `
-        <span>${player.player} — ${player.score}</span>
+        <span>${player.player} — ${playerScore}</span>
         <div class="buttons">
           <button onclick="updateScore('${player.player}', 1)">+1</button>
           <button onclick="updateScore('${player.player}', 5)">+5</button>
@@ -81,7 +85,7 @@ function updateScore(player, delta) {
   .then((res) => res.json())
   .then((data) => {
     console.log("Réponse du serveur :", data);
-    fetchData();
+    fetchData();  // Recharger les données après la mise à jour
   })
   .catch((error) => {
     console.error("Erreur lors de la mise à jour du score :", error);

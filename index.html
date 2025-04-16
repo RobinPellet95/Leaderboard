@@ -20,9 +20,6 @@
       font-size: 1.2em;
       margin: 5px 0;
     }
-    .buttons {
-      margin-top: 20px;
-    }
     select {
       padding: 5px;
     }
@@ -63,7 +60,7 @@
         return;
       }
 
-      if (Array.isArray(data[0].score)) {
+      if (data[0].avg !== undefined) {  // Vérifie si l'objet contient un score moyen pour une équipe
         // Classement par équipe
         data.forEach((team) => {
           const teamDiv = document.createElement("div");

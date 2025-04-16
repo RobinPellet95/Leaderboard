@@ -1,5 +1,5 @@
 
-const scriptURL = "https://script.google.com/macros/s/AKfycbx7ZaZ9Cynqa5Wn_EN5mT0lCyv2sfbCt7ls2MYecH4z__-PrmVWYkluxc0nZwq0JuMA/exec";
+const scriptURL = "https://script.google.com/macros/s/AKfycbyR_UreqzKlx-isrNdeU6tudcK4x6MeBrowlCp7sSmfQcFveyPAMXRVtDyX99L-pKlo/exec";
 
 let round = 1;
 

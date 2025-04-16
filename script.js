@@ -104,7 +104,7 @@ function renderLeaderboard(data) {
 }
 
 function updateScore(player, delta) {
-  console.log(`Updating score for ${player} with delta: ${delta}`); // Log pour vérifier si l'appel est effectué
+  console.log(`Mise à jour du score pour ${player} avec delta: ${delta}`);  // Ajout d'un log pour vérifier l'appel
 
   fetch(scriptURL, {
     method: "POST",

@@ -36,7 +36,7 @@ const teamAssignments = {
 
 document.getElementById("roundSelector").addEventListener("change", (e) => {
   round = parseInt(e.target.value);
-  fetchData();
+  fetchData();  // On recharge les données lorsque le round change
 });
 
 function fetchData() {
@@ -104,11 +104,20 @@ function renderLeaderboard(data) {
 }
 
 function updateScore(player, delta) {
+  console.log(`Updating score for ${player} with delta: ${delta}`); // Log pour vérifier si l'appel est effectué
+
   fetch(scriptURL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ player, delta })
-  }).then(() => fetchData());
+  })
+  .then(() => {
+    console.log("Score mis à jour pour " + player);
+    fetchData();  // Recharge les données après mise à jour
+  })
+  .catch((error) => {
+    console.error("Erreur lors de la mise à jour du score : ", error);  // Log des erreurs de mise à jour
+  });
 }
 
-fetchData();
+fetchData();  // Charger les données initialement au chargement de la page

@@ -1,4 +1,3 @@
-
 const scriptURL = "https://script.google.com/macros/s/AKfycbyR_UreqzKlx-isrNdeU6tudcK4x6MeBrowlCp7sSmfQcFveyPAMXRVtDyX99L-pKlo/exec";
 
 let round = 1;
@@ -18,21 +17,20 @@ const teamNames = {
 
 const teamAssignments = {
   2: {
-    // nom du joueur: nom de l'équipe Tour 2
-    "Alice": "Kakariki Rikiki",
-    "Bob": "Kakariki Rikiki",
-    "Charlie": "Kakariki Rikiki",
-    "David": "Kakariki Rikiki",
-    "Eve": "Kakariki Rikiki",
-    "Frank": "Kakariki Rikiki",
-    "Grace": "Kakariki Rikiki",
-    "Heidi": "Whero Myball?",
-    "Ivan": "Whero Myball?",
-    "Judy": "Whero Myball?",
-    "Mallory": "Whero Myball?",
-    "Niaj": "Whero Myball?",
-    "Olivia": "Whero Myball?",
-    "Peggy": "Whero Myball?"
+    "Taz": "Kakariki Rikiki",
+    "Jeantoine": "Kakariki Rikiki",
+    "BigDPierrick": "Kakariki Rikiki",
+    "Flo": "Kakariki Rikiki",
+    "Yarlav": "Kakariki Rikiki",
+    "Larraie": "Kakariki Rikiki",
+    "Dustin": "Kakariki Rikiki",
+    "Alex": "Whero Myball?",
+    "Robinator": "Whero Myball?",
+    "Bridou": "Whero Myball?",
+    "Yanno": "Whero Myball?",
+    "Mingouze": "Whero Myball?",
+    "Smet'": "Whero Myball?",
+    "Jaquier": "Whero Myball?"
   }
 };
 

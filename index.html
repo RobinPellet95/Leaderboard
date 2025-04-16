@@ -1,27 +1,99 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Leaderboard</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        table {
+            width: 80%;
+            margin: 50px auto;
+            border-collapse: collapse;
+            border: 2px solid #000;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        h1 {
+            color: #008080;
+        }
+        .team {
+            font-weight: bold;
+            color: #FF5733;
+        }
+        .score {
+            font-size: 18px;
+        }
+    </style>
 </head>
 <body>
-  <h1>Leaderboard</h1>
-  <div id="team1">
-    <h2>The Sand Traps</h2>
-    <p>Alice: <span id="alice-score">12</span> <button onclick="updateScore('Alice', 1)">+1</button> <button onclick="updateScore('Alice', -1)">-1</button></p>
-    <p>Bob: <span id="bob-score">15</span> <button onclick="updateScore('Bob', 1)">+1</button> <button onclick="updateScore('Bob', -1)">-1</button></p>
-  </div>
-  <div id="team2">
-    <h2>The Birdie Bunch</h2>
-    <p>Clara: <span id="clara-score">10</span> <button onclick="updateScore('Clara', 1)">+1</button> <button onclick="updateScore('Clara', -1)">-1</button></p>
-    <p>Daniel: <span id="daniel-score">8</span> <button onclick="updateScore('Daniel', 1)">+1</button> <button onclick="updateScore('Daniel', -1)">-1</button></p>
-  </div>
+    <h1>Leaderboard</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Player</th>
+                <th>Team</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody id="leaderboard">
+            <!-- Les données seront insérées ici -->
+        </tbody>
+    </table>
 
-  <script>
-    function updateScore(player, points) {
-      console.log(player + ' scored ' + points + ' points');
-      alert('Score updated for ' + player);
-    }
-  </script>
+    <script>
+        // Remplace cette URL par l'URL de ton Google Apps Script
+        var apiUrl = 'https://script.google.com/macros/s/AKfycbx7ZaZ9Cynqa5Wn_EN5mT0lCyv2sfbCt7ls2MYecH4z__-PrmVWYkluxc0nZwq0JuMA/exec';
+
+        // Fonction pour charger les données du leaderboard
+        function loadLeaderboard() {
+            fetch(apiUrl)
+                .then(response => response.json()) // Récupère les données JSON de Google Apps Script
+                .then(data => {
+                    const leaderboardTable = document.getElementById('leaderboard');
+                    leaderboardTable.innerHTML = ''; // Vide le tableau avant d'ajouter de nouvelles données
+
+                    data.forEach(player => {
+                        // Crée une nouvelle ligne pour chaque joueur
+                        const row = document.createElement('tr');
+
+                        // Crée une cellule pour le nom du joueur
+                        const playerCell = document.createElement('td');
+                        playerCell.textContent = player.player;
+                        row.appendChild(playerCell);
+
+                        // Crée une cellule pour l'équipe
+                        const teamCell = document.createElement('td');
+                        teamCell.textContent = player.team;
+                        row.appendChild(teamCell);
+
+                        // Crée une cellule pour le score
+                        const scoreCell = document.createElement('td');
+                        scoreCell.textContent = player.score;
+                        row.appendChild(scoreCell);
+
+                        // Ajoute la ligne au tableau
+                        leaderboardTable.appendChild(row);
+                    });
+                })
+                .catch(error => console.error('Error loading leaderboard:', error)); // Gestion des erreurs
+        }
+
+        // Charger les données dès que la page est prête
+        window.onload = loadLeaderboard;
+    </script>
 </body>
 </html>
+

@@ -20,6 +20,9 @@
       font-size: 1.2em;
       margin: 5px 0;
     }
+    .buttons {
+      margin-top: 20px;
+    }
     select {
       padding: 5px;
     }
@@ -40,16 +43,13 @@
   <div id="leaderboard"></div>
 
   <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbzj6b253f1Z2inSfuKEpVBoTHDuuCIAL87iVV5mHQ1zbFT-53T-OW4RInUB-KsP3dQc/exec";
+    const scriptURL = "https://script.google.com/macros/s/AKfycbyUn6-F55CnlFoTz_PU-sDDfbpRliu0SB0WSjeNQWXCS8tsXkVIZ7VqocWUkTBJq-t5/exec";
 
     // Fonction pour récupérer les données et les afficher
     function fetchData(type) {
       fetch(`${scriptURL}?type=${type}`)
         .then((res) => res.json())
-        .then((data) => {
-          console.log(data);  // Ajouter un log pour vérifier les données
-          renderLeaderboard(data);
-        })
+        .then((data) => renderLeaderboard(data))
         .catch((error) => console.error("Erreur lors de la récupération des données :", error));
     }
 
@@ -63,7 +63,7 @@
         return;
       }
 
-      if (data[0].avg !== undefined) {  // Vérifie si l'objet contient un score moyen pour une équipe
+      if (Array.isArray(data[0].score)) {
         // Classement par équipe
         data.forEach((team) => {
           const teamDiv = document.createElement("div");

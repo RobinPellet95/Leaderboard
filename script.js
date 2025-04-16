@@ -36,13 +36,17 @@ const teamAssignments = {
 
 document.getElementById("roundSelector").addEventListener("change", (e) => {
   round = parseInt(e.target.value);
+  console.log("Round sélectionné : ", round); // Log pour vérifier que le round est changé
   fetchData();  // On recharge les données lorsque le round change
 });
 
 function fetchData() {
   console.log("Fetching data from Google Apps Script...");  // Log pour vérifier si la requête est lancée
   fetch(scriptURL)
-    .then((res) => res.json())
+    .then((res) => {
+      console.log("Réponse reçue de Google Apps Script, statut : ", res.status);  // Log du statut de la réponse
+      return res.json();
+    })
     .then((data) => {
       console.log("Données reçues : ", data);  // Log des données pour vérifier leur contenu
       renderLeaderboard(data);
@@ -104,19 +108,23 @@ function renderLeaderboard(data) {
 }
 
 function updateScore(player, delta) {
-  console.log(`Mise à jour du score pour ${player} avec delta: ${delta}`);  // Ajout d'un log pour vérifier l'appel
+  console.log(`Mise à jour du score pour ${player} avec delta: ${delta}`);  // Log pour vérifier si l'appel est bien effectué
 
   fetch(scriptURL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ player, delta })
+    body: JSON.stringify({ player, delta })  // Envoi des données au serveur
   })
-  .then(() => {
-    console.log("Score mis à jour pour " + player);
+  .then((response) => {
+    console.log("Réponse du serveur :", response.status);  // Log du statut de la réponse
+    return response.text();  // On récupère la réponse du serveur sous forme de texte
+  })
+  .then((data) => {
+    console.log("Réponse du serveur après mise à jour : ", data);  // Log de la réponse
     fetchData();  // Recharge les données après mise à jour
   })
   .catch((error) => {
-    console.error("Erreur lors de la mise à jour du score : ", error);  // Log des erreurs de mise à jour
+    console.error("Erreur lors de la mise à jour du score : ", error);  // Log des erreurs
   });
 }
 

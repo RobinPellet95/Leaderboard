@@ -1,4 +1,4 @@
-const scriptURL = "https://script.google.com/macros/s/AKfycbx5R7cSP6Uj7R_A-7mS4rmphjY25tGwEs7Ww1i4HsTmO-wuzOga39Pn3uXqlqxostM6/exec";
+const scriptURL = "https://script.google.com/macros/s/AKfycbwjaLVzlwVjVr33RWCzctyg2qhzri8cZHIyJ2xjLJlOU6b2f_r60X659Ujq7nt_BsFg/exec";
 let round = 1;
 
 document.getElementById("roundSelector").addEventListener("change", (e) => {

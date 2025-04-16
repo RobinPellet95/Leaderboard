@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Leaderboard</title>
+  <link rel="stylesheet" href="style.css">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -47,27 +49,25 @@
       flex-direction: column;
     }
 
-    .team, .player {
+    .team,
+    .player {
       background-color: #f4f4f4;
       margin: 10px 0;
       padding: 15px;
       border-radius: 6px;
     }
 
-    .team h2, .player h3 {
+    .team h2,
+    .player h3 {
       margin: 0;
       font-size: 1.3em;
       color: #333;
     }
 
-    .team .score, .player .score {
+    .team .score,
+    .player .score {
       font-size: 1.1em;
       color: #555;
-    }
-
-    .player .details {
-      font-size: 1em;
-      margin-top: 5px;
     }
 
     .team .score {
@@ -81,76 +81,26 @@
     }
   </style>
 </head>
+
 <body>
 
   <div class="container">
     <h1>Leaderboard</h1>
 
-    <label for="leaderboardType">Sélectionnez le type de classement:</label>
-    <select id="leaderboardType">
-      <option value="team">Classement par Équipe</option>
-      <option value="individual">Classement Individuel</option>
-    </select>
+    <div>
+      <label for="leaderboardType">Sélectionnez le type de classement:</label>
+      <select id="leaderboardType">
+        <option value="team">Classement par Équipe</option>
+        <option value="individual">Classement Individuel</option>
+      </select>
+    </div>
 
     <div id="leaderboard" class="leaderboard"></div>
   </div>
 
-  <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbzuwbcVLwIaPCFTgAv9ILWjRwFDPf7GBRYENQqHGPDT32ay3WzG1-9byvMTnGEYQGOA/exec";
-
-    // Fonction pour récupérer les données et les afficher
-    function fetchData(type) {
-      fetch(`${scriptURL}?type=${type}`)
-        .then((res) => res.json())
-        .then((data) => renderLeaderboard(data))
-        .catch((error) => console.error("Erreur lors de la récupération des données :", error));
-    }
-
-    // Fonction pour afficher le leaderboard
-    function renderLeaderboard(data) {
-      const container = document.getElementById("leaderboard");
-      container.innerHTML = "";  // Efface le contenu précédent
-
-      if (data.length === 0) {
-        container.innerHTML = "<p>Aucune donnée trouvée.</p>";
-        return;
-      }
-
-      if (Array.isArray(data[0].players)) {
-        // Classement par équipe
-        data.forEach((team) => {
-          const teamDiv = document.createElement("div");
-          teamDiv.className = "team";
-          teamDiv.innerHTML = `<h2>${team.team} - ${team.avg.toFixed(1)} pts</h2>`;
-
-          team.players.forEach((player) => {
-            const playerDiv = document.createElement("div");
-            playerDiv.className = "player";
-            playerDiv.innerHTML = `<h3>${player.player}</h3><div class="score">${player.score} pts</div>`;
-            teamDiv.appendChild(playerDiv);
-          });
-
-          container.appendChild(teamDiv);
-        });
-      } else {
-        // Classement individuel
-        data.forEach((player) => {
-          const playerDiv = document.createElement("div");
-          playerDiv.className = "player";
-          playerDiv.innerHTML = `<h3>${player.player}</h3><div class="score">${player.score} pts</div>`;
-          container.appendChild(playerDiv);
-        });
-      }
-    }
-
-    // Charger les données au chargement
-    document.getElementById("leaderboardType").addEventListener("change", (e) => {
-      fetchData(e.target.value);
-    });
-
-    // Initialisation avec le classement par équipe
-    fetchData("team");
-  </script>
+  <!-- Lien vers ton script.js -->
+  <script src="script.js"></script>
 
 </body>
+
 </html>

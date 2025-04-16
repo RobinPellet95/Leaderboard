@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Leaderboard</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <h1>Leaderboard</h1>
+  <div id="team1">
+    <h2>The Sand Traps</h2>
+    <p>Alice: <span id="alice-score">12</span> <button onclick="updateScore('Alice', 1)">+1</button> <button onclick="updateScore('Alice', -1)">-1</button></p>
+    <p>Bob: <span id="bob-score">15</span> <button onclick="updateScore('Bob', 1)">+1</button> <button onclick="updateScore('Bob', -1)">-1</button></p>
+  </div>
+  <div id="team2">
+    <h2>The Birdie Bunch</h2>
+    <p>Clara: <span id="clara-score">10</span> <button onclick="updateScore('Clara', 1)">+1</button> <button onclick="updateScore('Clara', -1)">-1</button></p>
+    <p>Daniel: <span id="daniel-score">8</span> <button onclick="updateScore('Daniel', 1)">+1</button> <button onclick="updateScore('Daniel', -1)">-1</button></p>
+  </div>
+
+  <script>
+    function updateScore(player, points) {
+      console.log(player + ' scored ' + points + ' points');
+      alert('Score updated for ' + player);
+    }
+  </script>
+</body>
+</html>

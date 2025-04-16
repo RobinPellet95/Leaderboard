@@ -1,99 +1,21 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leaderboard</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
-        table {
-            width: 80%;
-            margin: 50px auto;
-            border-collapse: collapse;
-            border: 2px solid #000;
-        }
-        th, td {
-            padding: 10px;
-            border: 1px solid #ddd;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        h1 {
-            color: #008080;
-        }
-        .team {
-            font-weight: bold;
-            color: #FF5733;
-        }
-        .score {
-            font-size: 18px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Golf Leaderboard</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <h1>Leaderboard</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Player</th>
-                <th>Team</th>
-                <th>Score</th>
-            </tr>
-        </thead>
-        <tbody id="leaderboard">
-            <!-- Les données seront insérées ici -->
-        </tbody>
-    </table>
-
-    <script>
-        // Remplace cette URL par l'URL de ton Google Apps Script
-        var apiUrl = 'https://script.google.com/macros/s/AKfycbyR_UreqzKlx-isrNdeU6tudcK4x6MeBrowlCp7sSmfQcFveyPAMXRVtDyX99L-pKlo/exec';
-
-        // Fonction pour charger les données du leaderboard
-        function loadLeaderboard() {
-            fetch(apiUrl)
-                .then(response => response.json()) // Récupère les données JSON de Google Apps Script
-                .then(data => {
-                    const leaderboardTable = document.getElementById('leaderboard');
-                    leaderboardTable.innerHTML = ''; // Vide le tableau avant d'ajouter de nouvelles données
-
-                    data.forEach(player => {
-                        // Crée une nouvelle ligne pour chaque joueur
-                        const row = document.createElement('tr');
-
-                        // Crée une cellule pour le nom du joueur
-                        const playerCell = document.createElement('td');
-                        playerCell.textContent = player.player;
-                        row.appendChild(playerCell);
-
-                        // Crée une cellule pour l'équipe
-                        const teamCell = document.createElement('td');
-                        teamCell.textContent = player.team;
-                        row.appendChild(teamCell);
-
-                        // Crée une cellule pour le score
-                        const scoreCell = document.createElement('td');
-                        scoreCell.textContent = player.score;
-                        row.appendChild(scoreCell);
-
-                        // Ajoute la ligne au tableau
-                        leaderboardTable.appendChild(row);
-                    });
-                })
-                .catch(error => console.error('Error loading leaderboard:', error)); // Gestion des erreurs
-        }
-
-        // Charger les données dès que la page est prête
-        window.onload = loadLeaderboard;
-    </script>
+  <div class="container">
+    <h1>🏌️‍♂️ Koh Lanta Golf Leaderboard</h1>
+    <select id="roundSelector">
+      <option value="1">Tour 1</option>
+      <option value="2">Tour 2</option>
+    </select>
+    <div id="leaderboard"></div>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
-

@@ -1,24 +1,46 @@
+
 body {
-  font-family: "Times New Roman", Times, serif;
-  background-color: #004d23;
-  color: white;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f1f8f4;
+  color: #1d3b2a;
+  margin: 0;
   padding: 20px;
 }
-
+.container {
+  max-width: 900px;
+  margin: auto;
+}
 h1 {
   text-align: center;
-  color: #fff;
+  color: #265c36;
 }
-
-button {
-  background-color: #006400;
-  color: white;
-  border: none;
+.team {
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 20px 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.player {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+}
+.buttons button {
+  margin-left: 5px;
   padding: 5px 10px;
+  border: none;
+  background-color: #265c36;
+  color: white;
+  border-radius: 5px;
   cursor: pointer;
-  margin: 5px;
 }
-
-button:hover {
-  background-color: #008000;
+.buttons button:hover {
+  background-color: #3a8056;
+}
+select {
+  display: block;
+  margin: 0 auto 20px auto;
+  padding: 10px;
+  font-size: 16px;
 }

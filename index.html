@@ -46,7 +46,10 @@
     function fetchData(type) {
       fetch(`${scriptURL}?type=${type}`)
         .then((res) => res.json())
-        .then((data) => renderLeaderboard(data))
+        .then((data) => {
+          console.log(data);  // Ajouter un log pour vérifier les données
+          renderLeaderboard(data);
+        })
         .catch((error) => console.error("Erreur lors de la récupération des données :", error));
     }
 

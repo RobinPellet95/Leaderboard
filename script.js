@@ -1,4 +1,4 @@
-const scriptURL = "https://script.google.com/macros/s/AKfycbzfpigA36PIyUJQHtWbMQKgIHe2wTqstpxT1MoMNuOnuEJ2FpN_7s3YzbGuBmqj7i6r/exec";
+const scriptURL = "https://script.google.com/macros/s/AKfycbw238iwX4a23VhuXvPowDiZAwJn_HcHxF5kCgCu8inHrUZ2jRK_RmmloU7zbH8_j9eg/exec";
 let round = 1;
 
 document.getElementById("roundSelector").addEventListener("change", (e) => {
@@ -32,8 +32,7 @@ function renderLeaderboard(data) {
   let teams = {};
   data.forEach((player) => {
     const name = player.player;
-    // Vérification des données avant de les utiliser
-    const team = round === 2 ? (teamAssignments[2][name] || "Unassigned") : player.team;
+    const team = round === 2 ? teamAssignments[2][name] || "Unassigned" : player.team;
     if (!teams[team]) teams[team] = [];
     teams[team].push(player);
   });
@@ -41,7 +40,7 @@ function renderLeaderboard(data) {
   let teamAverages = [];
   for (let team in teams) {
     const players = teams[team];
-    const total = players.reduce((sum, p) => sum + (Number(p.score) || 0), 0); // Assurer que score est un nombre
+    const total = players.reduce((sum, p) => sum + Number(p.score), 0);
     const avg = total / players.length;
     teamAverages.push({ team, avg });
   }
@@ -54,13 +53,10 @@ function renderLeaderboard(data) {
     teamDiv.innerHTML = `<h2>${team} - ${avg.toFixed(1)} pts</h2>`;
 
     teams[team].forEach((player) => {
-      // Assure-toi que le score est bien défini, sinon on lui donne 0 par défaut
-      const playerScore = player.score || 0; 
-
       const playerDiv = document.createElement("div");
       playerDiv.className = "player";
       playerDiv.innerHTML = `
-        <span>${player.player} — ${playerScore}</span>
+        <span>${player.player} — ${player.score}</span>
         <div class="buttons">
           <button onclick="updateScore('${player.player}', 1)">+1</button>
           <button onclick="updateScore('${player.player}', 5)">+5</button>
@@ -85,7 +81,7 @@ function updateScore(player, delta) {
   .then((res) => res.json())
   .then((data) => {
     console.log("Réponse du serveur :", data);
-    fetchData();  // Recharger les données après la mise à jour
+    fetchData();
   })
   .catch((error) => {
     console.error("Erreur lors de la mise à jour du score :", error);

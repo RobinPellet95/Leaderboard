@@ -1,21 +1,27 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Golf Leaderboard</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>🏌️‍♂️Leaderboard</h1>
-    <select id="roundSelector">
-      <option value="1">Tour 1</option>
-      <option value="2">Tour 2</option>
-    </select>
-    <div id="leaderboard"></div>
-  </div>
-  <script src="script.js"></script>
+    <div id="container">
+        <h1>Golf Tournament Leaderboard</h1>
+        
+        <!-- Sélection du tour -->
+        <select id="roundSelector">
+            <option value="1">Tour 1</option>
+            <option value="2">Tour 2</option>
+        </select>
+
+        <div id="leaderboard">
+            <!-- Le classement sera affiché ici -->
+        </div>
+    </div>
+
+    <!-- Ajout du fichier script.js -->
+    <script src="script.js"></script>
 </body>
 </html>

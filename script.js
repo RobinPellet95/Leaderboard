@@ -43,13 +43,17 @@ function fetchData() {
   fetch(scriptURL)
     .then((res) => res.json())
     .then((data) => {
+      console.log("Data récupérée : ", data);  // Log des données pour vérifier
       renderLeaderboard(data);
+    })
+    .catch((error) => {
+      console.error("Erreur de récupération des données : ", error);  // Log des erreurs
     });
 }
 
 function renderLeaderboard(data) {
   const container = document.getElementById("leaderboard");
-  container.innerHTML = "";
+  container.innerHTML = "";  // Efface le contenu précédent
 
   let teams = {};
   data.forEach((player) => {

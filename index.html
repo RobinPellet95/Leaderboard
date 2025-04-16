@@ -7,40 +7,93 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 20px;
+      background-color: #f8f8f8;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
-    .team {
-      margin: 20px 0;
+
+    .container {
+      background-color: white;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 80%;
+      max-width: 1000px;
+      border-radius: 8px;
     }
-    .team h2 {
-      font-size: 1.5em;
+
+    h1 {
+      text-align: center;
+      color: #333;
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    select {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 30px;
+      font-size: 1em;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+
+    .leaderboard {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .team, .player {
+      background-color: #f4f4f4;
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 6px;
+    }
+
+    .team h2, .player h3 {
+      margin: 0;
+      font-size: 1.3em;
       color: #333;
     }
-    .player {
+
+    .team .score, .player .score {
+      font-size: 1.1em;
+      color: #555;
+    }
+
+    .player .details {
+      font-size: 1em;
+      margin-top: 5px;
+    }
+
+    .team .score {
+      font-size: 1.5em;
+      color: #2196F3;
+    }
+
+    .player .score {
       font-size: 1.2em;
-      margin: 5px 0;
-    }
-    .buttons {
-      margin-top: 20px;
-    }
-    select {
-      padding: 5px;
+      color: #4CAF50;
     }
   </style>
 </head>
 <body>
 
-  <h1>Leaderboard</h1>
-  
-  <div>
+  <div class="container">
+    <h1>Leaderboard</h1>
+
     <label for="leaderboardType">Sélectionnez le type de classement:</label>
     <select id="leaderboardType">
-      <option value="individual">Classement Individuel</option>
       <option value="team">Classement par Équipe</option>
+      <option value="individual">Classement Individuel</option>
     </select>
-  </div>
 
-  <div id="leaderboard"></div>
+    <div id="leaderboard" class="leaderboard"></div>
+  </div>
 
   <script>
     const scriptURL = "https://script.google.com/macros/s/AKfycbzuwbcVLwIaPCFTgAv9ILWjRwFDPf7GBRYENQqHGPDT32ay3WzG1-9byvMTnGEYQGOA/exec";
@@ -63,7 +116,7 @@
         return;
       }
 
-      if (Array.isArray(data[0].score)) {
+      if (Array.isArray(data[0].players)) {
         // Classement par équipe
         data.forEach((team) => {
           const teamDiv = document.createElement("div");
@@ -73,7 +126,7 @@
           team.players.forEach((player) => {
             const playerDiv = document.createElement("div");
             playerDiv.className = "player";
-            playerDiv.innerHTML = `${player.player} — ${player.score} pts`;
+            playerDiv.innerHTML = `<h3>${player.player}</h3><div class="score">${player.score} pts</div>`;
             teamDiv.appendChild(playerDiv);
           });
 
@@ -84,7 +137,7 @@
         data.forEach((player) => {
           const playerDiv = document.createElement("div");
           playerDiv.className = "player";
-          playerDiv.innerHTML = `${player.player} — ${player.score} pts`;
+          playerDiv.innerHTML = `<h3>${player.player}</h3><div class="score">${player.score} pts</div>`;
           container.appendChild(playerDiv);
         });
       }
@@ -95,8 +148,8 @@
       fetchData(e.target.value);
     });
 
-    // Initialisation avec le classement individuel
-    fetchData("individual");
+    // Initialisation avec le classement par équipe
+    fetchData("team");
   </script>
 
 </body>

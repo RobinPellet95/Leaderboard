@@ -1,38 +1,5 @@
 const scriptURL = "https://script.google.com/macros/s/AKfycbyR_UreqzKlx-isrNdeU6tudcK4x6MeBrowlCp7sSmfQcFveyPAMXRVtDyX99L-pKlo/exec";
-
 let round = 1;
-
-const teamNames = {
-  1: {
-    "The Sand Traps": "The Sand Traps",
-    "The Hole-In-Ones": "The Hole-In-Ones",
-    "The Birdie Bunch": "The Birdie Bunch",
-    "The Tee Masters": "The Tee Masters"
-  },
-  2: {
-    "Kakariki Rikiki": "Kakariki Rikiki",
-    "Whero Myball?": "Whero Myball?"
-  }
-};
-
-const teamAssignments = {
-  2: {
-    "Taz": "Kakariki Rikiki",
-    "Jeantoine": "Kakariki Rikiki",
-    "BigDPierrick": "Kakariki Rikiki",
-    "Flo": "Kakariki Rikiki",
-    "Yarlav": "Kakariki Rikiki",
-    "Larraie": "Kakariki Rikiki",
-    "Dustin": "Kakariki Rikiki",
-    "Alex": "Whero Myball?",
-    "Robinator": "Whero Myball?",
-    "Bridou": "Whero Myball?",
-    "Yanno": "Whero Myball?",
-    "Mingouze": "Whero Myball?",
-    "Smet'": "Whero Myball?",
-    "Jaquier": "Whero Myball?"
-  }
-};
 
 document.getElementById("roundSelector").addEventListener("change", (e) => {
   round = parseInt(e.target.value);

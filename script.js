@@ -8,18 +8,14 @@ document.getElementById("roundSelector").addEventListener("change", (e) => {
 });
 
 function fetchData() {
-  console.log("Fetching data from Google Apps Script...");  // Log pour vérifier si la requête est lancée
   fetch(scriptURL)
-    .then((res) => {
-      console.log("Réponse reçue de Google Apps Script, statut : ", res.status);  // Log du statut de la réponse
-      return res.json();
-    })
+    .then((res) => res.json())
     .then((data) => {
-      console.log("Données reçues : ", data);  // Log des données pour vérifier leur contenu
-      renderLeaderboard(data);
+      console.log("Données reçues :", data);
+      renderLeaderboard(data); // cette fonction affiche les données
     })
     .catch((error) => {
-      console.error("Erreur lors de la récupération des données : ", error);  // Log des erreurs
+      console.error("Erreur lors de la récupération des données :", error);
     });
 }
 

@@ -40,20 +40,27 @@ document.getElementById("roundSelector").addEventListener("change", (e) => {
 });
 
 function fetchData() {
+  console.log("Fetching data from Google Apps Script...");  // Log pour vérifier si la requête est lancée
   fetch(scriptURL)
     .then((res) => res.json())
     .then((data) => {
-      console.log("Data récupérée : ", data);  // Log des données pour vérifier
+      console.log("Données reçues : ", data);  // Log des données pour vérifier leur contenu
       renderLeaderboard(data);
     })
     .catch((error) => {
-      console.error("Erreur de récupération des données : ", error);  // Log des erreurs
+      console.error("Erreur lors de la récupération des données : ", error);  // Log des erreurs
     });
 }
 
 function renderLeaderboard(data) {
   const container = document.getElementById("leaderboard");
   container.innerHTML = "";  // Efface le contenu précédent
+
+  if (!data || data.length === 0) {
+    console.log("Aucune donnée à afficher");
+    container.innerHTML = "<p>Aucune donnée trouvée.</p>";
+    return;
+  }
 
   let teams = {};
   data.forEach((player) => {
